@@ -5,7 +5,7 @@
    ================================================================ */
 :root {
   /* Fondo general de la página */
-  --color-fondo: #f0f0f0;
+  --color-fondo: #f3f7fb;
 
   /* Superficies de tarjetas y paneles */
   --color-panel: #ffffff;
@@ -24,6 +24,12 @@
   /* Acento visual: versión, puntos y detalles */
   --color-acento: #f4aa32;
   --color-acento-claro: #fff2d8;
+
+  /* Colores de la etiqueta automática por ambiente */
+  --color-ambiente-pruebas: #7047c8;
+  --color-ambiente-preproduccion: #b36b00;
+  --color-ambiente-produccion: #218653;
+  --color-ambiente-local: #62788b;
 
   /* Estados de la canalización */
   --color-exito: #218653;
@@ -100,6 +106,11 @@ button { font: inherit; }
   letter-spacing: .04em;
   padding: 9px 13px;
 }
+
+.environment-badge[data-environment="test"] { border-color: transparent; background: #eee8fb; color: var(--color-ambiente-pruebas); }
+.environment-badge[data-environment="staging"] { border-color: transparent; background: #fff1d8; color: var(--color-ambiente-preproduccion); }
+.environment-badge[data-environment="production"] { border-color: transparent; background: var(--color-exito-claro); color: var(--color-ambiente-produccion); }
+.environment-badge[data-environment="local"] { border-color: transparent; background: var(--color-panel-suave); color: var(--color-ambiente-local); }
 
 .intro { max-width: 790px; margin: 0 0 28px; }
 
