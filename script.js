@@ -31,6 +31,32 @@ const runner = document.getElementById("artifact-runner");
 const railFill = document.getElementById("rail-fill");
 const resetButton = document.getElementById("reset-button");
 
+function detectEnvironment() {
+  const host = window.location.hostname.toLowerCase();
+
+  if (host.startsWith("deploy-preview-") || host.includes("--deploy-preview")) {
+    return { key: "test", label: "AMBIENTE: PRUEBAS · DEPLOY PREVIEW" };
+  }
+
+  if (host.startsWith("staging--") || host.startsWith("staging.")) {
+    return { key: "staging", label: "AMBIENTE: PREPRODUCCIÓN · STAGING" };
+  }
+
+  if (host === "" || host === "localhost" || host === "127.0.0.1" || host.endsWith(".local")) {
+    return { key: "local", label: "AMBIENTE: LOCAL" };
+  }
+
+  return { key: "production", label: "AMBIENTE: PRODUCCIÓN · MAIN" };
+}
+
+function showEnvironment() {
+  const badge = document.getElementById("environment-badge");
+  const environment = detectEnvironment();
+  badge.dataset.environment = environment.key;
+  badge.textContent = environment.label;
+}
+
+
 let completed = 0;
 let score = 0;
 
@@ -96,4 +122,5 @@ resetButton.addEventListener("click", () => {
   render();
 });
 
+showEnvironment();
 render();
